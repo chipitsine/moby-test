@@ -17,6 +17,6 @@ jobs:
         run: |
           iwr -uri https://download.docker.com/win/static/stable/x86_64/docker-28.1.1.zip -outfile docker-28.1.1.zip
           Expand-Archive docker-28.1.1.zip -DestinationPath $Env:ProgramFiles
-          &$Env:ProgramFiles\Docker\dockerd --register-service
+          &$Env:ProgramFiles\Docker\dockerd --register-service --fixed-cidr 192.168.100.0/24
           Start-Service docker
           &$Env:ProgramFiles\Docker\docker run hello-world:nanoserver
