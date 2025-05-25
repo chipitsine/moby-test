@@ -4,15 +4,15 @@ on: [ push, pull_request, workflow_dispatch ]
 
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        os: [windows-2019, windows-2022, windows-2025]
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    runs-on: ${{ matrix.os }}
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           iwr -uri https://download.docker.com/win/static/stable/x86_64/docker-28.1.1.zip -outfile docker-28.1.1.zip
